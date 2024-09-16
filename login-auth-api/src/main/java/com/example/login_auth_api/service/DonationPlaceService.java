@@ -13,12 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class DonationPlaceService {
     @Autowired
     private DonationPlaceRepository donationPlaceRepository;
 
-        public DonationPlaceDTO donationPlaceRegister(DonationPlaceDTO body) {
+        public void donationPlaceRegister(DonationPlaceDTO body) {
 
             DonationPlace donationPlace = new DonationPlace();
 
@@ -34,10 +33,7 @@ public class DonationPlaceService {
                 throw new RuntimeException("Donation Place already exists");
             }
             else {
-                 DonationPlace savedDonationPlace=donationPlaceRepository.save(donationPlace);
-
-                return new DonationPlaceDTO(savedDonationPlace.getName(), savedDonationPlace.getLatitude(), savedDonationPlace.getLongitude(),savedDonationPlace.getAddress());
-
+                 donationPlaceRepository.save(donationPlace);
             }
 
         }

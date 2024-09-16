@@ -19,12 +19,20 @@ import java.util.Collections;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
-    @Autowired
-    TokenService tokenService;
-    @Autowired
-    UserRepository userRepository;
 
-    @Override
+    TokenService tokenService;
+
+    UserRepository userRepository;
+    
+    
+
+    public SecurityFilter(TokenService tokenService, UserRepository userRepository) {
+		super();
+		this.tokenService = tokenService;
+		this.userRepository = userRepository;
+	}
+
+	@Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
         var login = tokenService.validateToken(token);

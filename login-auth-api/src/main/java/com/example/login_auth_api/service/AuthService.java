@@ -15,13 +15,22 @@ import java.util.Optional;
 
 
 @Service
-@RequiredArgsConstructor
+
 public class AuthService {
-        @Autowired
-        private final UserRepository repository;
+       
+
+		private final UserRepository repository;
         private final PasswordEncoder passwordEncoder;
         private final TokenService tokenService;
 
+        public AuthService(final UserRepository  repository,final PasswordEncoder passwordEncoder, final TokenService tokenService) {
+    		
+		this.repository = repository;
+		this.passwordEncoder = passwordEncoder;
+		this.tokenService = tokenService;
+	}
+
+        
         public ResponseDTO login(LoginRequestDTO body) {
             User user = repository.findByEmail(body.email())
                     .orElseThrow(() -> new RuntimeException("User not found"));

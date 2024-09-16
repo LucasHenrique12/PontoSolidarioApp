@@ -8,12 +8,17 @@ import lombok.Setter;
 
 @Entity
 @Table(name ="donation")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Donation {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+    
 }

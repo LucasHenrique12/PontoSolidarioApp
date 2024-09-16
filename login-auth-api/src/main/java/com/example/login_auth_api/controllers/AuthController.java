@@ -18,13 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/auth")
-@RequiredArgsConstructor
+@RequestMapping("pontosolidario/auth")
 public class AuthController {
 
     private final AuthService authService;
+    
+    public AuthController(final AuthService authService) {
+		this.authService = authService;
+	}
 
-    @PostMapping("/login")
+	@PostMapping("/login")
     public ResponseEntity<ResponseDTO> login(@RequestBody LoginRequestDTO body) {
         try {
             ResponseDTO response = authService.login(body);
