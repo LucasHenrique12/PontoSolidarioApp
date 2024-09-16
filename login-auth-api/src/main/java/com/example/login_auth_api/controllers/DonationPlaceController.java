@@ -41,4 +41,22 @@ private DonationPlaceService donationPlaceService;
             }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DonationPlace> findById(@PathVariable String id) {
+        return donationPlacerepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDonationPlace(@PathVariable String id) {
+        if (donationPlacerepository.existsById(id)) {
+            donationPlacerepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }
